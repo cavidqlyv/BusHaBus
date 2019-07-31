@@ -7,15 +7,15 @@ import { Component, OnInit } from "@angular/core";
 })
 export class ConverterComponent implements OnInit {
   money: number;
-  result: number;
+  result: number = 0;
   constructor() {}
 
   ngOnInit() {}
 
   onFormSubmit() {
-    this.result = this.money / 1.7;
+    this.result = this.money * 1.7;
   }
   onChange() {
-    this.result = this.money / 1.7;
+    this.result = this.money * 1.7;
   }
 }
