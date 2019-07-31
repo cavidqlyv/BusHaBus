@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-converter",
@@ -6,16 +7,47 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./converter.component.scss"]
 })
 export class ConverterComponent implements OnInit {
-  money: number;
-  result: number = 0;
-  constructor() {}
+  money = 0;
+  result = 0;
+  rate = 1;
+  currency = "USD";
 
-  ngOnInit() {}
+  readonly apiUrl = "https://free.currconv.com/api/v7/convert";
+
+  readonly apiKey = "6f19702aa7952a9a107d";
+
+  constructor(private httpClient: HttpClient) {}
+
+  async ngOnInit() {
+    await this.getRate();
+  }
+
+  async getRate() {
+    let apiParams = {
+      q: `${this.currency}_AZN`,
+      compact: "ultra",
+      apiKey: this.apiKey
+    };
+
+    let response = await this.httpClient
+      .get<any>(this.apiUrl, { params: apiParams })
+      .toPromise();
+    this.rate = response[`${this.currency}_AZN`];
+  }
+
+  convert() {
+    this.result = this.money / this.rate;
+  }
 
   onFormSubmit() {
-    this.result = this.money * 1.7;
+    this.convert();
   }
-  onChange() {
-    this.result = this.money * 1.7;
+  onMoneyChange() {
+    this.convert();
+  }
+
+  async onCurrencyChanged() {
+    await this.getRate();
+    this.convert();
   }
 }

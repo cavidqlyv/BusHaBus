@@ -3,11 +3,11 @@
   <label>Money:</label>
   <div class="input-group mb-3">
     <div class="input-group-prepend">
-      <span class="input-group-text">$</span>
+      <span class="input-group-text">Manat</span>
     </div>
     <input
       [(ngModel)]="money"
-      (keyup)="onChange()"
+      (keyup)="onMoneyChange()"
       type="number"
       name="money"
       class="form-control"
@@ -17,6 +17,21 @@
       <span class="input-group-text">.00</span>
     </div>
   </div>
+
+  <label for="result">Currency:</label>
+  <select
+    (change)="onCurrencyChanged()"
+    name="currency"
+    id="currency"
+    class="form-control"
+    [(ngModel)]="currency"
+  >
+    <option value="USD">USD</option>
+    <option value="AZN">AZN</option>
+    <option value="EUR">EUR</option>
+    <option value="RUB">RUB</option>
+    <option value="UAH">UAH</option>
+  </select>
 
   <label for="result">Result:</label>
   <input
