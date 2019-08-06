@@ -9,13 +9,17 @@ import { DigitsPipe } from "./pipes/digits.pipe";
 import { BakuBusComponent } from "./components/baku-bus/baku-bus.component";
 
 import { AgmCoreModule } from "@agm/core";
+import { ToDoComponent } from "./components/to-do/to-do.component";
+import { BusNumberPipe } from "./pipes/bus-number.pipe";
 
 @NgModule({
   declarations: [
     AppComponent,
     ConverterComponent,
     DigitsPipe,
-    BakuBusComponent
+    BakuBusComponent,
+    ToDoComponent,
+    BusNumberPipe
   ],
   imports: [
     BrowserModule,

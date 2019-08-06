@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-md-6">
+    <p>Tasks: {{ tasks.length }}</p>
+    <div class="list-group">
+      <a
+        *ngFor="let item of tasks"
+        href="#"
+        class="list-group-item list-group-item-action"
+        [class.done-task]="item.done"
+      >
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ item.title }}</h5>
+          <small>{{ item.done ? "done" : "undone" }}</small>
+        </div>
+        <p class="mb-1">{{ item.description }}</p>
+        <button (click)="onTsakClick(item)" class="btn btn-success mr-3">
+          <i class="fa fa-check"></i>
+        </button>
+        <button (click)="onTaskDelete(item)" class="btn btn-danger mr-3">
+          <i class="fa fa-trash"></i>
+        </button>
+        <button (click)="onTaskEdit(item)" class="btn btn-secondary">
+          <i class="fa fa-edit"></i>
+        </button>
+      </a>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <form (submit)="OnFormSubmit()">
+      <div class="form-group my-4">
+        <label for="exampleInputEmail1">Task name:</label>
+        <input
+          [(ngModel)]="newTask.title"
+          name="NewTask"
+          id="NewTask"
+          class="form-control"
+        />
+        <label for="taskDescription">Task description:</label>
+
+        <textarea
+          [(ngModel)]="newTask.description"
+          class="form-control"
+          name="taskDescription"
+          id="taskDescription"
+          rows="3"
+        ></textarea>
+      </div>
+      <button
+        *ngIf="!editMode"
+        [disabled]="newTask.title == undefined || newTask.title.length <= 0"
+        type="submit"
+        class="btn btn-primary"
+      >
+        Submit
+      </button>
+
+      <button
+        *ngIf="editMode"
+        (click)="onDoneClick()"
+        [disabled]="newTask.title == undefined || newTask.title.length <= 0"
+        class="btn btn-primary"
+      >
+        Done
+      </button>
+    </form>
+  </div>
+</div>

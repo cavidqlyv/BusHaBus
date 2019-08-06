@@ -1,8 +1,17 @@
-<h1>Baku Bus</h1>
-<agm-map [latitude]="latatude" [longitude]="longatude" [zoom]="11">
+<H1>BakuBus</H1>
+<div class="form-group">
+  <label for="bus">Buss Number:</label>
+  <select [(ngModel)]="busNumber" name="bus" id="bus" class="form-control">
+    <option value="all">All</option>
+    <option *ngFor="let num of busNubers" [value]="num" [text]="num"></option>
+  </select>
+</div>
+
+<agm-map [longitude]="lon" [latitude]="lat" [zoom]="11">
   <agm-marker
-    *ngFor="let bus of busses"
-    [latitude]="bus['@attributes'].LATETUDE"
-    [longitude]="bus['@attributes'].LONGATUDE"
+    *ngFor="let bus of busses | busNumber: busNumber"
+    [latitude]="bus.LATITUDE"
+    [longitude]="bus.LONGITUDE"
+    [label]="bus.DISPLAY_ROUTE_CODE"
   ></agm-marker>
 </agm-map>
