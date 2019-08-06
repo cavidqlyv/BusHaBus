@@ -2,7 +2,7 @@
   <div class="col-md-6">
     <p>Tasks: {{ tasks.length }}</p>
     <div class="list-group">
-      <a
+      <div
         *ngFor="let item of tasks"
         href="#"
         class="list-group-item list-group-item-action"
@@ -22,7 +22,7 @@
         <button (click)="onTaskEdit(item)" class="btn btn-secondary">
           <i class="fa fa-edit"></i>
         </button>
-      </a>
+      </div>
     </div>
   </div>
   <div class="col-md-6">
